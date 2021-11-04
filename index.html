@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./app.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Titillium+Web:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap" rel="stylesheet">
+    <title>Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <div id="overlay" class="is-active"></div>
+    <div class="choose-play-mode is-active" data-choose-play-mode>
+      <h2>請選擇遊戲模式</h2>
+      <div class="btns-wrapper">
+        <button id="play-with-human-btn">雙人遊玩</button>
+        <button id="play-with-ai-btn">與 AI 遊玩</button>
+      </div>
+    </div>
+    <form class="add-player-form" action="#" method="GET" data-add-form>
+      <h2>請輸入玩家名稱</h2>
+      <div class="input-wrapper">
+        <label for="player1">玩家 1：</label>
+        <input type="text" id="player1">
+      </div>
+      <div class="input-wrapper">
+        <label for="player2">玩家 2：</label>
+        <input type="text" id="player2">
+      </div>
+      <input type="submit" value="開始遊戲">
+    </form>
+    <div class="page-container">
+      <div class="play-area">
+        <div class="player-card">
+          <div class="avatar-container">
+            <img data-robot-avater src="https://i.pinimg.com/564x/c6/a3/2c/c6a32c9ef9d6d7e26b1b661f91b9e209.jpg" alt="">
+          </div>
+          <p class="player-name">Name</p>
+          <p class="turn-msg" data-is-your-turn>輪到你了！</p>
+        </div>
+        <div class="gameboard x" id="board">
+          <div class="cell" data-cell>1</div>
+          <div class="cell" data-cell>2</div>
+          <div class="cell" data-cell>3</div>
+          <div class="cell" data-cell>4</div>
+          <div class="cell" data-cell>5</div>
+          <div class="cell" data-cell>6</div>
+          <div class="cell" data-cell>7</div>
+          <div class="cell" data-cell>8</div>
+          <div class="cell" data-cell>9</div>
+          <button>RESET</button>
+          <p class="winning-msg" data-winning-msg></p>
+        </div>
+        <div class="player-card">
+          <div class="avatar-container">
+            <img src="https://i.pinimg.com/564x/c6/a3/2c/c6a32c9ef9d6d7e26b1b661f91b9e209.jpg" alt="">
+          </div>
+          <p class="player-name">Name</p>
+          <p class="turn-msg" data-is-your-turn>輪到你了！</p>
+        </div>
+      </div>
+    </div>
+    <script src="./app.js"></script>
+  </body>
+</html>
