@@ -1,6 +1,13 @@
 # Tic-Tac-Toe
 ## 專案網址及預覽
-**version 1**
+**now version 2**
+<img width="1263" alt="螢幕快照 2021-11-06 17 31 28" src="https://user-images.githubusercontent.com/77038018/140605285-18163a01-d753-42c0-9fa1-3bd9a25553fc.png">
+
+<img width="1264" alt="螢幕快照 2021-11-06 17 31 57" src="https://user-images.githubusercontent.com/77038018/140605289-ff0982c6-c3b9-4750-9c82-1d695951fb36.png">
+
+<img width="286" alt="螢幕快照 2021-11-06 17 32 25" src="https://user-images.githubusercontent.com/77038018/140605294-0783690d-b902-422f-8d1c-bc1c4bc18b5b.png">
+
+*version 1*<br>
 <img width="827" alt="螢幕快照 2021-11-04 15 23 16" src="https://user-images.githubusercontent.com/77038018/140273445-336a3fec-60c7-40ab-b62d-6ed7a8588035.png">
 
 https://lunzaizai0223.github.io/Tic-Tac-Toe/
