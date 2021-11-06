@@ -36,7 +36,7 @@ https://lunzaizai0223.github.io/Tic-Tac-Toe/
 - 2021/11/06 完成 version 2
    - 版面更新
    - JS 有分制定規則的 `Game Module`、負責操控 DOM 的 `DomController Module` 以及玩家物件的藍圖 `PlayerFactory Factory Function`
-   - 因為是用 CSS `class` 當作標記，判別有沒有達到勝利，所以在 `DomController Module` 內有判定勝負的 `_checkWinner` 以及判斷平手的 `_isDraw`
+   - 因為是用 CSS `class` 當作標記，把 `nodeList` 轉為 `array` 後用 `forEach` 迭代判別有沒有達到勝利，所以在 `DomController Module` 內有判定勝負的 `_checkWinner` 以及判斷平手的 `_isDraw`
 
 ## 預計實作
 - 記錄玩家的勝利次數
