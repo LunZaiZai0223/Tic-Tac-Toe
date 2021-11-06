@@ -7,6 +7,7 @@
 
 body {
   background-color: #EED6D3;
+  font-family: "Ubuntu", "Noto Sans TC", sans-serif;
 }
 body button {
   cursor: pointer;
@@ -23,6 +24,9 @@ body button {
   display: none;
 }
 
+/**
+ * RWD 
+ */
 .header h1 {
   text-shadow: 4px 4px 1px #a49393;
   color: #391306;
@@ -46,31 +50,54 @@ body button {
   transition: top 1s ease-in;
 }
 .menu .game-name {
-  margin: 0.5rem 0;
+  margin-bottom: 2rem;
   text-shadow: 4px 4px 1px #a49393;
   color: #391306;
   font-size: 5rem;
-  font-weight: 600;
+  font-weight: 700;
+}
+@media (max-width: 450px) {
+  .menu .game-name {
+    font-size: 3rem;
+  }
+}
+@media (max-width: 375px) {
+  .menu .btns-wrapper {
+    display: flex;
+  }
 }
 .menu button {
   padding: 1rem;
+  margin-left: 0.5rem;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   border-radius: 0.25rem;
   color: rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.5s;
+}
+@media (max-width: 375px) {
+  .menu button {
+    font-size: 0.8rem;
+  }
 }
 .menu .play-with-ai-btn {
   background-color: #FBE698;
 }
+.menu .play-with-ai-btn:hover {
+  box-shadow: 4px 4px 2px #c8b879;
+}
 .menu .play-with-human-btn {
   background-color: #FFB067;
+}
+.menu .play-with-human-btn:hover {
+  box-shadow: 4px 4px 2px #cc8c52;
 }
 .menu .start-game-btn {
   width: 50%;
   padding: 0.5rem 0;
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   border: none;
   background-color: #391306;
   color: #fff;
@@ -86,17 +113,28 @@ body button {
   padding: 1rem 1.5rem;
   border: 1px solid;
   border-radius: 0.25rem;
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease-in-out;
+}
+@media (max-width: 450px) {
+  .add-player-form {
+    width: 80%;
+  }
 }
 .add-player-form h1 {
   margin: 0.5rem;
+  font-family: "Noto Sans TC";
+  font-size: 2rem;
 }
 .add-player-form .input-wrapper {
   margin: 0.5rem 0;
 }
 .add-player-form .input-wrapper label {
   display: block;
+  font-family: "Noto Sans TC";
+  font-size: 1.2rem;
 }
 .add-player-form .input-wrapper input[type=text] {
   min-height: 1.5rem;
@@ -115,7 +153,7 @@ body button {
   cursor: pointer;
   background-color: #900020;
   color: #fdfdfd;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 main {
@@ -126,8 +164,14 @@ main {
   max-width: 1124px;
   min-height: 100vh;
   margin: 0 auto;
+  padding: 1rem 0;
   transform: scale(0);
   transition: transform 1s;
+}
+@media (max-width: 768px) {
+  main {
+    align-items: flex-start;
+  }
 }
 
 .player-card {
@@ -137,15 +181,67 @@ main {
   padding: 0.5rem;
   position: relative;
 }
+@media (max-width: 768px) {
+  .player-card {
+    margin-top: 20%;
+  }
+}
+@media (max-width: 450px) {
+  .player-card {
+    margin-top: 0.5rem;
+  }
+}
+@media (max-width: 415px) {
+  .player-card {
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 375px) {
+  .player-card {
+    margin-top: 0;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .player-card {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
 .player-card .avatart-wrapper {
   width: 150px;
   height: 150px;
+}
+@media (max-width: 375px) {
+  .player-card .avatart-wrapper {
+    width: 125px;
+    height: 125px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .player-card .avatart-wrapper {
+    width: 100px;
+    height: 100px;
+  }
 }
 .player-card .avatart-wrapper .avatar {
   width: 150px;
   height: 150px;
   display: block;
   border-radius: 0.25rem;
+}
+@media (max-width: 375px) {
+  .player-card .avatart-wrapper .avatar {
+    width: 125px;
+    height: 125px;
+  }
+}
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .player-card .avatart-wrapper .avatar {
+    width: 100px;
+    height: 100px;
+  }
 }
 .player-card h2 {
   margin: 1rem 0;
@@ -161,6 +257,24 @@ main {
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+@media (max-width: 768px) {
+  .gameboard {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+  }
+}
+@media (max-width: 450px) {
+  .gameboard {
+    transform: translate(-50%, -30%);
+  }
+}
+@media (max-width: 415px) {
+  .gameboard {
+    transform: translate(-50%, -22%);
+  }
 }
 .gameboard .row {
   display: flex;
@@ -178,6 +292,24 @@ main {
   background-color: #E8B4B8;
   cursor: pointer;
 }
+@media (max-width: 768px) {
+  .gameboard .row .cell {
+    width: 125px;
+    height: 125px;
+  }
+}
+@media (max-width: 415px) {
+  .gameboard .row .cell {
+    width: 100px;
+    height: 100px;
+  }
+}
+@media (max-width: 375px) {
+  .gameboard .row .cell {
+    width: 90px;
+    height: 90px;
+  }
+}
 .gameboard .btn-wrapper {
   justify-content: flex-end;
 }
@@ -187,12 +319,12 @@ main {
   color: #fdfdfd;
   border: none;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   border-radius: 0.25rem;
 }
 .gameboard .winning-msg-wrapper {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .gameboard .cell.x {
@@ -204,6 +336,12 @@ main {
   height: calc(150px * .9);
   background-color: #67595E;
   position: absolute;
+}
+@media (max-width: 415px) {
+  .gameboard .cell.x:before, .gameboard .cell.x:after {
+    width: calc(110px * .15);
+    height: calc(110px * .9);
+  }
 }
 .gameboard .cell.x:before {
   transform: rotate(-45deg);
@@ -223,6 +361,12 @@ main {
   border-radius: 50%;
   position: absolute;
 }
+@media (max-width: 415px) {
+  .gameboard .cell.o:before {
+    width: calc(110px * .7);
+    height: calc(110px * .7);
+  }
+}
 .gameboard .cell.o:after {
   content: "";
   width: calc(150px * .5);
@@ -230,6 +374,12 @@ main {
   background-color: #E8B4B8;
   border-radius: 50%;
   position: absolute;
+}
+@media (max-width: 415px) {
+  .gameboard .cell.o:after {
+    width: calc(110px * .5);
+    height: calc(110px * .5);
+  }
 }
 
 /**
@@ -245,6 +395,12 @@ main {
   height: calc(150px * .9);
   background-color: rgba(103, 89, 94, 0.3);
   position: absolute;
+}
+@media (max-width: 415px) {
+  .gameboard.x .cell:not(.x):not(.o):hover:before, .gameboard.x .cell:not(.x):not(.o):hover:after {
+    width: calc(110px * .15);
+    height: calc(110px * .9);
+  }
 }
 .gameboard.x .cell:not(.x):not(.o):hover:before {
   transform: rotate(-45deg);
@@ -264,6 +420,12 @@ main {
   border-radius: 50%;
   position: absolute;
 }
+@media (max-width: 415px) {
+  .gameboard.o .cell:not(.x):not(.o):hover:before {
+    width: calc(110px * .7);
+    height: calc(110px * .7);
+  }
+}
 .gameboard.o .cell:not(.x):not(.o):hover:after {
   content: "";
   width: calc(150px * .5);
@@ -271,6 +433,12 @@ main {
   background-color: #E8B4B8;
   border-radius: 50%;
   position: absolute;
+}
+@media (max-width: 415px) {
+  .gameboard.o .cell:not(.x):not(.o):hover:after {
+    width: calc(110px * .5);
+    height: calc(110px * .5);
+  }
 }
 
 /*# sourceMappingURL=app.css.map */
