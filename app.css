@@ -27,6 +27,12 @@ body button {
 /**
  * RWD 
  */
+@media (max-width: 450px) {
+  .header {
+    text-align: center;
+    padding-top: 2rem;
+  }
+}
 .header h1 {
   text-shadow: 4px 4px 1px #a49393;
   color: #391306;
@@ -201,14 +207,6 @@ main {
     margin-top: 0;
   }
 }
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .player-card {
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-}
 .player-card .avatart-wrapper {
   width: 150px;
   height: 150px;
@@ -217,12 +215,6 @@ main {
   .player-card .avatart-wrapper {
     width: 125px;
     height: 125px;
-  }
-}
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .player-card .avatart-wrapper {
-    width: 100px;
-    height: 100px;
   }
 }
 .player-card .avatart-wrapper .avatar {
@@ -235,12 +227,6 @@ main {
   .player-card .avatart-wrapper .avatar {
     width: 125px;
     height: 125px;
-  }
-}
-@media screen and (min-width: 481px) and (max-width: 768px) {
-  .player-card .avatart-wrapper .avatar {
-    width: 100px;
-    height: 100px;
   }
 }
 .player-card h2 {

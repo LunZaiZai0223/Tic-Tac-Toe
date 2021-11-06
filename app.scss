@@ -50,6 +50,10 @@ body {
 }
 
 .header {
+  @include mobile {
+    text-align: center;
+    padding-top: 2rem;
+  }
   h1 {
     text-shadow: 4px 4px 1px #a49393;
     color: #391306;
@@ -223,12 +227,12 @@ main {
   @include special-iphone {
     margin-top: 0;
   }
-  @include smaller-desktop {
-    margin-top: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  // @include smaller-desktop {
+  //   margin-top: 0;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: center;
+  // }
   .avatart-wrapper {
     width: 150px;
     height: 150px;
@@ -236,10 +240,10 @@ main {
       width: 125px;
       height: 125px;
     }
-    @include smaller-desktop {
-      width: 100px;
-      height: 100px;
-    }
+    // @include smaller-desktop {
+    //   width: 100px;
+    //   height: 100px;
+    // }
     .avatar {
       width: 150px;
       height: 150px;
@@ -249,10 +253,10 @@ main {
         width: 125px;
         height: 125px;
       }
-      @include smaller-desktop {
-        width: 100px;
-        height: 100px;
-      }
+      // @include smaller-desktop {
+      //   width: 100px;
+      //   height: 100px;
+      // }
     }
   }
   h2 {
