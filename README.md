@@ -26,6 +26,9 @@ https://lunzaizai0223.github.io/Tic-Tac-Toe/
 
 感謝大神們的分享。
 
+### 遊戲流程圖
+https://whimsical.com/project-tic-tac-toe-flowchart-BHyobUs4QcQu22YAZ41RmM
+
 ### 功能
 - 可選擇兩人遊戲或者獨自與 AI 遊戲
 - RWD
@@ -37,8 +40,9 @@ https://lunzaizai0223.github.io/Tic-Tac-Toe/
    - 版面更新
    - JS 有分制定規則的 `Game Module`、負責操控 DOM 的 `DomController Module` 以及玩家物件的藍圖 `PlayerFactory Factory Function`
    - 因為是用 CSS `class` 當作標記，把 `nodeList` 轉為 `array` 後用 `forEach` 迭代判別有沒有達到勝利，所以在 `DomController Module` 內有判定勝負的 `_checkWinner` 以及判斷平手的 `_isDraw`
+- 2021/11/07 完成 version 2.1
 
 ## 預計實作
-- 記錄玩家的勝利次數
-- 版面優化 （done, version 2)
-- 代碼整理
+- 記錄玩家的勝利次數（done, version 2.1）
+- 版面優化（done, version 2)
+- 代碼整理（done, version 2.1）

@@ -10,7 +10,7 @@ body {
     cursor: pointer;
   }
 }
-/**
+/*
  * 快速控制
  */
 .text-uppercase {
@@ -19,15 +19,9 @@ body {
 .d-none {
   display: none;
 }
-/**
+/*
  * RWD 
  */
-@mixin smaller-desktop {
-  @media screen and (min-width:481px) and (max-width:768px) {
-    @content;
-  }
-}
-
 @mixin pad {
   @media (max-width: 768px) {
     @content;
@@ -77,8 +71,6 @@ body {
   // 到時候可以用 js inline style 
   // https://stackoverflow.com/questions/14753147/add-inline-style-using-javascript/14753190
   transition: top 1s ease-in;
-  // animation-name: menu;
-  // animation-duration: 3s;
   .game-name {
     margin-bottom: 2rem;
     text-shadow: 4px 4px 1px #a49393;
@@ -129,17 +121,6 @@ body {
     color: #fff;
     border-radius: .25rem;
   }
-  // @keyframes menu {
-  //   from {
-  //     top: 50%;
-  //   }
-  //   to {
-  //     position: absolute;
-  //     top: 15%;
-  //     visibility: hidden;
-  //     opacity: 0;
-  //   }
-  // }
 }
 .add-player-form {
   position: fixed;
@@ -193,9 +174,7 @@ body {
 
 main {
   display: flex;
-  // 可以新增一個 class 專門處理顯示不顯示
   justify-content: space-evenly;
-  // flex-wrap: wrap;
   align-items: center;
   width: 100%;
   max-width: 1124px;
@@ -219,20 +198,14 @@ main {
     margin-top: 20%;
   }
   @include mobile {
-    margin-top: .5rem;
+    margin-top: 3vh;
   }
   @include smaller-mobile {
-    margin-top: 2rem;
+    margin-top: 5%;
   }
   @include special-iphone {
     margin-top: 0;
   }
-  // @include smaller-desktop {
-  //   margin-top: 0;
-  //   display: flex;
-  //   flex-direction: column;
-  //   align-items: center;
-  // }
   .avatart-wrapper {
     width: 150px;
     height: 150px;
@@ -240,10 +213,6 @@ main {
       width: 125px;
       height: 125px;
     }
-    // @include smaller-desktop {
-    //   width: 100px;
-    //   height: 100px;
-    // }
     .avatar {
       width: 150px;
       height: 150px;
@@ -253,35 +222,15 @@ main {
         width: 125px;
         height: 125px;
       }
-      // @include smaller-desktop {
-      //   width: 100px;
-      //   height: 100px;
-      // }
     }
   }
   h2 {
-    margin: 1rem 0;
+    margin: .5rem 0;
   }
   .whos-turn-msg {
     opacity: 0;
   }
-  // &:after {
-  //   content: "It's your turn!";
-  //   position: absolute;
-  // }
 }
-/*
-目前輪到誰的提示
- */
-//  等到有輪次出來才會出現
-// .player-card.?? {
-//  &:after {
-//    content: "It's your turn!";
-//    position: absolute;
-//    bottom: -20%;
-//    right: 17%;
-//  }
-// }
 .gameboard {
   display: flex;
   flex-direction: column;
@@ -344,6 +293,12 @@ main {
   }
 }
 .gameboard {
+  /*
+   * 1. 用新增 class 的方式把 mark 畫在 cell 中
+   * 2. 用偽元素來做圖示
+   * 3. cell 用 position: relative，偽元素可以用 position: absolute，以 cell 為基準對齊
+   * 4. cell 在用 flex 設定置中，讓偽元素可以置中（就不需些位置了 top, left...）
+  */
   .cell.x {
     cursor: not-allowed;
     &:before,
@@ -388,8 +343,6 @@ main {
       background-color: #E8B4B8;
       border-radius: 50%;
       position: absolute;
-      // justify-self: center;
-      // align-self: center;
       @include smaller-mobile {
         width: calc(110px * .5);
         height: calc(110px * .5);
@@ -397,11 +350,11 @@ main {
     }
   }
 }
-/**
+/*
  * 1. 藉由 gameborad + x / o class 判斷目前該誰
  * 2. hover 提示 及 點擊出現對應的 mark
  */
-/**
+/*
  * x 提示
  */
 .gameboard.x {
@@ -430,7 +383,7 @@ main {
         }
       }
   }
-/**
+/*
  * o 提示
  */
 .gameboard.o {
@@ -456,6 +409,9 @@ main {
             background-color: #E8B4B8;
             border-radius: 50%;
             position: absolute;
+            /*
+            因為 cell 已經有用 flex 設定置中 + relative 了，所以 mark 偽元素只要 absolute 就會吃到置中的設定
+             */
             // justify-self: center;
             // align-self: center;
             @include smaller-mobile {

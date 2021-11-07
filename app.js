@@ -1,25 +1,38 @@
-/**
+/*
  * GOALS:
  *   - 盡可能把全部的東西擠一個 module 中
  *   - 使用 module / factory function
- * 
- * 1. 先完成開場 DOM
  */
 
- /*
- Player Factory
-  */
- function PlayerFactory (name, mark) {
-   return {name, mark};
- }
-
+/**
+ * Player Factory Function
+ * @param {String} name
+ * @param {String} mark
+ * @return {Object} 
+ */
+function PlayerFactory (name, mark, winningCount) {
+  return {name, mark, winningCount};
+}
+/**
+ * Game Module
+ * 1. 處理規則層面的事情
+ *     - 勝利標準
+ *     - 輪次按鈕
+ *     - 遊戲模式的按鈕
+ * @returns {Object} 
+ *  setPlayerInPlayingWithAiMode, => 在 AI 模式中建立玩家
+ *  setPlayerInPlayingWithHumanMode, => 在 Human 模式中建立玩家
+ *  getPlayer, => 取得玩家
+ *  getIsCirclesTurn, => 取得輪次的按鈕
+ *  setIsCirclesTurn,  => 更換輪次按鈕的狀態
+ *  getPlayingMode, => 取得遊戲模式
+ *  setPlayingMode, => 更改遊戲模式
+ *  getGameIsEnd, => 取得目前遊戲是否結束的按鈕
+ *  setGameIsEnd, => 更換遊戲目前是否結束的按鈕的狀態
+ *  initialize, => 遊戲初始化
+ *  getWinningCombinations => 取得勝利條件
+ */
 const Game = (() => {
-  let player1 = {};
-  let player2 = {};
-  // 直接強制 x 先開始
-  let isCirclesTurn = false;
-  let isWithAiPlay = false;
-  let isGameEnd = false;
   const winningCombinations = [
       [0, 1, 2],
       [3, 4, 5],
@@ -29,15 +42,22 @@ const Game = (() => {
       [2, 5, 8],
       [0, 4, 8],
       [2, 4, 6]
-    ]; 
+  ]; 
 
+  let player1 = {};
+  let player2 = {};
+  // 直接強制 x 先開始
+  let isCirclesTurn = false;
+  let isWithAiPlay = false;
+  let isGameEnd = false;
+  
   function setPlayerInPlayingWithAiMode () {
-    player1 = PlayerFactory('AI', 'X');
-    player2 = PlayerFactory('HUMAN', 'O');
+    player1 = PlayerFactory('AI', 'X', 0);
+    player2 = PlayerFactory('HUMAN', 'O', 0);
   }
   function setPlayerInPlayingWithHumanMode (name1, name2) {
-    player1 = PlayerFactory(name1, 'X');
-    player2 = PlayerFactory(name2, 'O');
+    player1 = PlayerFactory(name1, 'X', 0);
+    player2 = PlayerFactory(name2, 'O', 0);
   }
   function getPlayer () {
     return { player1, player2 };
@@ -57,6 +77,12 @@ const Game = (() => {
     // 更改狀態 => 與 ai 玩
     isWithAiPlay = !isWithAiPlay;
   }
+  function playerOneHasWon () {
+    player1.winningCount ++;
+  }
+  function playerTwoHasWon () {
+    player2.winningCount ++;
+  }
   function getGameIsEnd () {
     return isGameEnd;
   }
@@ -71,8 +97,10 @@ const Game = (() => {
     return winningCombinations;
   }
 
-  /*
-  DOM 
+  /**
+   * DomController Module
+   * 1. 處理 DOM 網頁畫面的事情
+   *     - 如 eventListener 等
    */
   const DomController = (() => {
     const _pageHeader = document.querySelector('[data-header]');
@@ -82,16 +110,18 @@ const Game = (() => {
     const _playWithHumanBtn = document.querySelector('[data-play-with-human-btn]');
     const _addPlayerForm = document.querySelector('[data-add-player-form]');
     const _playArea = document.querySelector('[data-play-area]');
+    // 把 nodeList 轉為 array
+    // => 可以使用 array methods
     const _turnMsg = [...document.querySelectorAll('[data-turn-msg]')];
     const _winningMsgEle = document.querySelector('[data-winning-msg]');
     const _cells = [...document.querySelectorAll('[data-cell]')];
     const _gameBoard = document.querySelector('#board');
     const _restGameBtn = document.querySelector('[data-rest-btn]');
-    // playerNameInput
-    const player1Input = document.querySelector('#player1');
-    const player2Input = document.querySelector('#player2');
+    // playerNameInputElements
+    const _player1Input = document.querySelector('#player1');
+    const _player2Input = document.querySelector('#player2');
     // playerName
-    const playerNameEle = document.querySelectorAll('[data-player-name]');
+    const _playerNameEle = document.querySelectorAll('[data-player-name]');
 
     /*
     Class Name
@@ -100,15 +130,6 @@ const Game = (() => {
     const _xClass = 'x';
     const _oClass = 'o';
 
-    console.log(_pageHeader, _menu, _playWithAiBtn, _playWithHumanBtn, _addPlayerForm, _playArea, _winningMsgEle, _cells, _gameBoard);
-
-
-    let isWithAIPlay = false;
-    // 一律都讓 X 先開始
-    let isCirclesTurn = false;
-    // let player1 = {};
-    // let player2 = {};
-    
     function _closeMenu () {
       _menu.style.display = 'none';
     }
@@ -126,13 +147,12 @@ const Game = (() => {
     }
     function _setPlayerName () {
       const playerObj = Game.getPlayer();
-      playerNameEle[0].innerText = playerObj.player1.name;
-      playerNameEle[1].innerText = playerObj.player2.name;
+      _playerNameEle[0].innerText = playerObj.player1.name;
+      _playerNameEle[1].innerText = playerObj.player2.name;
     }
     function _clickHandler (event) {
       // with Ai play
       if (event.target === _playWithAiBtn) {
-        isWithAIPlay = true;
         // 改變狀態 true => Ai Mode
         Game.setPlayingMode();
         _closeMenu();
@@ -140,7 +160,6 @@ const Game = (() => {
         _openPlayArea();
         Game.setPlayerInPlayingWithAiMode();
         _setPlayerName();
-        // _startGame();
       // human play
       } else if (event.target === _playWithHumanBtn) {
         _closeMenu();
@@ -153,7 +172,7 @@ const Game = (() => {
       event.preventDefault();
       _closeAddPlayerForm();
       // 不能直接宣告變數時就 .value 會的到空白 => 宣告連結記憶體時就會儲存空白
-      Game.setPlayerInPlayingWithHumanMode(player1Input.value, player2Input.value);
+      Game.setPlayerInPlayingWithHumanMode(_player1Input.value, _player2Input.value);
       _setPlayerName();
       _openPlayArea();
     }
@@ -168,9 +187,6 @@ const Game = (() => {
       } else {
         clickedCellEle.classList.add(_oClass);
       }
-      console.log(Game.getIsCirclesTurn());
-      // Game.setIsCirclesTurn();
-      console.log(Game.getIsCirclesTurn());
       _checkWinner(Game.getIsCirclesTurn());
     }
     function _changeTurn () {
@@ -199,10 +215,9 @@ const Game = (() => {
           _aiPlays();          
         }
       }
-      // _changeTurn();
-      // _changeTurn();
     }
     function _startGame () {
+      console.log('遊戲開始！');
       Game.initialize();
       _setCellsEventListener(_cells);
       _winningMsgEle.style.opacity = 0;
@@ -236,9 +251,6 @@ const Game = (() => {
         } else {
         _changeTurn();
         }
-        // if (Game.getPlayingMode()) {
-        //   _aiPlays();
-        // }
       }
     }
     function _endGame () {
@@ -265,11 +277,16 @@ const Game = (() => {
     }
     function _showWinningMsg (currentTurn) {
       const obj = Game.getPlayer();
+      const winningCount = [...document.querySelectorAll('[data-winning-count]')];
       _winningMsgEle.style.opacity = 1;
       if (currentTurn === _xClass) {
         _winningMsgEle.innerText = `${obj.player1.name}勝利了✌️！`;
+        Game.playerOneHasWon();
+        winningCount[0].innerText = Game.getPlayer().player1.winningCount;
       } else {
         _winningMsgEle.innerText = `${obj.player2.name}勝利了✌️！`;
+        Game.playerTwoHasWon();
+        winningCount[1].innerText = Game.getPlayer().player2.winningCount;
       }
     }
     function _isDraw () {
@@ -289,29 +306,17 @@ const Game = (() => {
       // AI 的 Mark 並沒有透過 click event 新增，所以人類用滑鼠點的時候會新增 o class => x 被蓋掉了
       beSetMarkCellByAi.removeEventListener('click', _cellClickHandler);
       _checkWinner(Game.getIsCirclesTurn());
-      // _changeTurn();
     }
-    // function _ () {
 
-    // }
-
-    // _openAddPlayerForm();
-    
     /*
-    Event
+    Events
      */
     _choosePlayingModeWrapper.addEventListener('click', _clickHandler);
     _addPlayerForm.addEventListener('submit', _submitHandler);
     _restGameBtn.addEventListener('click', _resetGame);
 
-    function getPlayingMode () {
-      return isWithAIPlay;
-    }
-
-    return { getPlayingMode };
   })();
 
-  console.log(`這個不會報錯${DomController.getPlayingMode()}`);
   return { 
     setPlayerInPlayingWithAiMode, 
     setPlayerInPlayingWithHumanMode,
@@ -322,30 +327,9 @@ const Game = (() => {
     setPlayingMode,
     getGameIsEnd,
     setGameIsEnd,
+    playerOneHasWon,
+    playerTwoHasWon,
     initialize,
     getWinningCombinations
      };
-})();
-
-
-
-
-/*
-以下之後要再整理
-=> 叫用後 = 不是物件
- */
-const func1 = (() => {
-
-const func2 = (() => {
-    let y = 2;
-    function inner (x) {
-    console.log(x + x);
-    }
-    return { inner };
-  })();
-        function outer () {
-        console.log('123Outer');
-        func2.inner();
-    }
-    outer();
 })();
